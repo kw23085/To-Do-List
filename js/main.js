@@ -6,7 +6,12 @@ $signupForm.on('submit', function(evt) {
     evt.preventDefault()
     var $newItem = $('<p>')
     $newItem.append('<input type="checkbox"><i class="glyphicon glyphicon-star"></i><span>' + $inputField.val() + '</span><i class="glyphicon glyphicon-remove"></i>')
+
+    // hide the item before prepending
+    $newItem.hide()
     $list.append($newItem)
+    // animate the reveal
+    $newItem.slideDown('slow')
     $inputField.val('')
 })
 
@@ -19,5 +24,7 @@ $list.on('click', '.glyphicon-star', function() {
 })
 
 $list.on('click', '.glyphicon-remove', function() {
-    $(this).parent().remove()
+    $(this).parent().slideUp('slow', function() {
+        $(this).remove()
+    })
 })
